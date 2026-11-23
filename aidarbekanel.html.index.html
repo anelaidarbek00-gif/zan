@@ -1,0 +1,913 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Еңбек дауы — құқықтық ақпарат</title>
+
+<style>
+:root {
+  --main:#faedd7;
+  --accent:#8c74ed;
+  --purple-light:#eee9ff;
+  --orange:#f5b95c;
+  --green:#78bd91;
+  --teal:#67bdb5;
+  --text:#292638;
+  --muted:#777181;
+  --white:#fff;
+  --border:#e9e3f0;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#fffaf3;
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  line-height:1.65;
+}
+.wrap{width:min(1150px,92%);margin:auto}
+header{
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:10;
+  border-bottom:1px solid var(--border);
+}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 0;
+  gap:15px;
+}
+.logo{font-weight:800;font-size:20px}
+.logo span{color:var(--accent)}
+nav{display:flex;gap:13px;flex-wrap:wrap}
+nav a{
+  color:var(--text);
+  text-decoration:none;
+  font-size:12px;
+  font-weight:600;
+}
+nav a:hover{color:var(--accent)}
+
+.hero{
+  background:linear-gradient(120deg,var(--main),white);
+  padding:70px 0;
+}
+.hero h1{
+  max-width:800px;
+  font-size:clamp(30px,5vw,50px);
+  line-height:1.2;
+}
+.hero p{max-width:700px;color:var(--muted)}
+.eyebrow{color:var(--accent);font-weight:bold;font-size:12px}
+
+.btn{
+  display:inline-block;
+  border:0;
+  border-radius:9px;
+  padding:12px 19px;
+  background:var(--accent);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  text-decoration:none;
+  transition:.2s;
+}
+.btn:hover{transform:translateY(-2px);filter:brightness(.96)}
+.btn.light{
+  background:white;
+  color:var(--accent);
+  border:1px solid var(--border);
+}
+main{padding:40px 0}
+.section{margin-bottom:55px;scroll-margin-top:90px}
+.section h2{font-size:27px;margin-bottom:7px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:20px}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:22px;
+  box-shadow:0 7px 22px rgba(50,40,80,.06);
+  transition:.25s;
+}
+.card:hover{transform:translateY(-3px)}
+.card h3{font-size:17px;margin-top:0}
+.card p{font-size:13px;color:var(--muted)}
+.tag{
+  display:inline-block;
+  padding:4px 9px;
+  background:var(--purple-light);
+  color:var(--accent);
+  font-size:11px;
+  border-radius:6px;
+  font-weight:bold;
+}
+a{color:var(--accent)}
+
+input,select{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:white;
+  font-size:14px;
+  color:var(--text);
+}
+label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+.field{margin-bottom:17px}
+
+/* КАЛЬКУЛЯТОР */
+
+.calculator{
+  background:linear-gradient(135deg,#faedd7,#f0eaff);
+  border:1px solid #e3d9f8;
+  border-radius:18px;
+  padding:25px;
+}
+.calc-inner{
+  max-width:650px;
+  background:white;
+  border-radius:13px;
+  padding:23px;
+}
+.calc-inner h3{margin-top:0}
+.result{
+  display:none;
+  margin-top:20px;
+  padding:20px;
+  border-radius:12px;
+  background:#f2edff;
+  border:1px solid #dcd1ff;
+}
+.result h3{color:var(--accent)}
+.result-date{
+  font-size:25px;
+  font-weight:800;
+  margin:10px 0;
+}
+.result-status{
+  font-weight:bold;
+  margin-top:10px;
+}
+.notice{
+  margin-top:16px;
+  padding:14px;
+  background:#fff5e5;
+  border:1px solid #f0dfbd;
+  color:#73592d;
+  border-radius:10px;
+  font-size:12px;
+}
+.error{
+  display:none;
+  color:#b64054;
+  font-size:13px;
+  margin-top:10px;
+}
+
+/* КҮНТІЗБЕ */
+
+.calendar-card{
+  background:white;
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:15px;
+}
+.calendar-controls{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+.calendar-controls select{max-width:180px}
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+}
+.dayname{
+  text-align:center;
+  font-weight:bold;
+  font-size:12px;
+  padding:9px 2px;
+}
+.day{
+  border:1px solid var(--border);
+  border-radius:9px;
+  min-height:68px;
+  background:#fffaf3;
+  padding:7px;
+  text-align:left;
+  cursor:pointer;
+  font-size:13px;
+}
+.day:hover{outline:2px solid var(--accent)}
+.day.empty{border:0;background:transparent;cursor:default}
+.day.national{
+  background:#8c74ed;
+  color:white;
+  border-color:#8c74ed;
+}
+.day.state{
+  background:#f5b95c;
+  color:#4c3716;
+  border-color:#f5b95c;
+}
+.day.religious{
+  background:#67bdb5;
+  color:#173d3a;
+  border-color:#67bdb5;
+}
+.day.weekend{
+  background:#78bd91;
+  color:#183c27;
+  border-color:#78bd91;
+}
+.day.today{
+  outline:3px solid #292638;
+  outline-offset:-3px;
+}
+.day small{
+  display:block;
+  font-size:9px;
+  line-height:1.3;
+  margin-top:4px;
+}
+.legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin:20px 0;
+}
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:11px;
+}
+.dot{
+  width:13px;
+  height:13px;
+  border-radius:4px;
+}
+.day-info{
+  margin-top:15px;
+  background:#f7f3ff;
+  border-radius:10px;
+  padding:15px;
+  font-size:13px;
+  min-height:65px;
+}
+
+/* СҰРАҚТАР */
+
+.faq details{
+  padding:16px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin:9px 0;
+}
+.faq summary{font-weight:bold;cursor:pointer;font-size:14px}
+.faq p{font-size:13px;color:var(--muted)}
+
+.article-search{max-width:500px;margin-bottom:17px}
+.article{
+  padding:15px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:10px;
+}
+.article-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+footer{
+  background:#292638;
+  color:white;
+  padding:30px 0;
+}
+footer p{font-size:12px;color:#d2cedd}
+
+@media(max-width:850px){
+  nav{display:none}
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .grid,.grid.two,.article-list{grid-template-columns:1fr}
+  .hero{padding:45px 0}
+  .calculator{padding:12px}
+  .calc-inner{padding:16px}
+  .calendar-card{padding:9px}
+  .calendar{gap:3px}
+  .day{min-height:54px;padding:4px;font-size:11px}
+  .day small{font-size:8px}
+  .dayname{font-size:10px}
+  .calendar-controls{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="wrap top">
+  <div class="logo">ЕҢБЕК <span>ҚҰҚЫҒЫ</span></div>
+  <nav>
+    <a href="#home">Басты бет</a>
+    <a href="#law">Заңнама</a>
+    <a href="#articles">Баптар</a>
+    <a href="#calculator">Калькулятор</a>
+    <a href="#calendar">Күнтізбе</a>
+    <a href="#faq">Сұрақ-жауап</a>
+    <a href="#sources">Дереккөздер</a>
+  </nav>
+</div>
+</header>
+
+<section class="hero" id="home">
+<div class="wrap">
+  <div class="eyebrow">ҚАЗАҚСТАН РЕСПУБЛИКАСЫНЫҢ ЕҢБЕК ЗАҢНАМАСЫ</div>
+  <h1>Еңбек құқығын білу — өз құқығыңды қорғау</h1>
+  <p>
+    Еңбек қатынастары, жеке еңбек даулары және келісу комиссиясына
+    жүгіну мерзімдері туралы ақпараттық-құқықтық сайт.
+  </p>
+  <a class="btn" href="#calculator">Калькуляторға өту</a>
+  <a class="btn light" href="#articles">Заң баптарын оқу</a>
+</div>
+</section>
+
+<main class="wrap">
+
+<section class="section" id="law">
+<h2>Еңбек заңнамасы</h2>
+<p class="sub">Қазақстан Республикасындағы еңбек қатынастарын реттейтін нормативтік актілер.</p>
+
+<div class="grid">
+  <div class="card">
+    <span class="tag">Негізгі заң</span>
+    <h3>ҚР Еңбек кодексі</h3>
+    <p>Еңбек қатынастарының құқықтық негіздерін белгілейді.</p>
+    <a href="https://adilet.zan.kz/kaz/docs/K1500000414" target="_blank">Ресми мәтін</a>
+  </div>
+  <div class="card">
+    <span class="tag">Конституциялық негіз</span>
+    <h3>ҚР Конституциясы</h3>
+    <p>Азаматтардың еңбек ету бостандығы мен құқықтарын бекітеді.</p>
+    <a href="https://adilet.zan.kz/kaz" target="_blank">Ресми мәтін</a>
+  </div>
+  <div class="card">
+    <span class="tag">Әлеуметтік құқық</span>
+    <h3>ҚР Әлеуметтік кодексі</h3>
+    <p>Әлеуметтік қорғау мен әлеуметтік қамсыздандыру мәселелерін реттейді.</p>
+    <a href="https://adilet.zan.kz/kaz/docs/K2300000224" target="_blank">Ресми мәтін</a>
+  </div>
+</div>
+</section>
+
+<section class="section" id="articles">
+<h2>Еңбек кодексінің маңызды баптары</h2>
+<p class="sub">Қажетті бапты нөмірі немесе атауы бойынша іздеңіз.</p>
+
+<input class="article-search" id="searchArticle" placeholder="Бапты іздеу..." oninput="showArticles()">
+<div class="article-list" id="articleList"></div>
+</section>
+
+<!-- КАЛЬКУЛЯТОР -->
+<section class="section" id="calculator">
+<h2>Жүгіну мерзімін есептеу калькуляторы</h2>
+<p class="sub">ҚР Еңбек кодексінің 160-бабындағы негізгі мерзімдер бойынша есептік күнді анықтау.</p>
+
+<div class="calculator">
+<div class="calc-inner">
+
+<h3>Мерзімді анықтау</h3>
+
+<div class="field">
+<label for="disputeType">Еңбек дауының түрін таңдаңыз</label>
+<select id="disputeType">
+<option value="1">Жұмысқа қайта алу туралы дау — келісу комиссиясына</option>
+<option value="2">Комиссия шешімінен кейін сотқа жүгіну</option>
+<option value="3">Басқа еңбек даулары</option>
+</select>
+</div>
+
+<div class="field">
+<label for="startDate">Мерзім басталатын күнді таңдаңыз</label>
+<input type="date" id="startDate">
+</div>
+
+<button class="btn" onclick="calculateDeadline()">Есептеу</button>
+
+<div class="error" id="calcError"></div>
+
+<div class="result" id="result">
+  <span class="tag">ЕСЕПТЕУ НӘТИЖЕСІ</span>
+  <h3 id="resultTitle">Соңғы жүгіну күні</h3>
+  <div class="result-date" id="resultDate"></div>
+  <p id="resultWeekday"></p>
+  <p id="resultDays"></p>
+  <div class="result-status" id="resultStatus"></div>
+  <hr style="border:0;border-top:1px solid #ddd3f5;margin:15px 0">
+  <p id="resultArticle"></p>
+  <div class="notice">
+    <strong>Ескерту!</strong> Есептеу нәтижесін қолданыстағы заңнамамен
+    тексеріп алуды ұмытпаңыз. Мерзімнің басталу күні мен құқықтық
+    ерекшеліктері нақты жағдайға байланысты болуы мүмкін.
+    Мерзімдерді ҚР Еңбек кодексінің 160-бабынан тексеріңіз.
+    Бұл калькулятор ақпараттық мақсатта жасалған.
+  </div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- МЕРЕКЕЛЕР КҮНТІЗБЕСІ -->
+<section class="section" id="calendar">
+<h2>Қазақстан Республикасының мерекелер күнтізбесі</h2>
+<p class="sub">Мерекелер мен демалыс күндері түрлі түспен белгіленген.</p>
+
+<div class="calendar-card">
+<div class="calendar-controls">
+<select id="month" onchange="renderCalendar()"></select>
+<select id="year" onchange="renderCalendar()"></select>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="dot" style="background:#8c74ed"></span> Ұлттық мереке</div>
+  <div class="legend-item"><span class="dot" style="background:#f5b95c"></span> Мемлекеттік мереке</div>
+  <div class="legend-item"><span class="dot" style="background:#67bdb5"></span> Діни мереке</div>
+  <div class="legend-item"><span class="dot" style="background:#78bd91"></span> Демалыс күндері</div>
+</div>
+
+<div class="calendar" id="calendarGrid"></div>
+
+<div class="day-info" id="dayInfo">
+Күн туралы ақпаратты көру үшін күнтізбеден қажетті күнді таңдаңыз.
+</div>
+</div>
+
+<div class="notice">
+Күнтізбедегі мерекелердің негізгі күндері көрсетілген.
+Демалыс күндерін ауыстыру және қосымша демалыс күндері туралы
+Үкіметтің тиісті жылға арналған ресми шешімдерін тексеріңіз.
+</div>
+</section>
+
+<section class="section" id="faq">
+<h2>Жиі қойылатын сұрақтар</h2>
+<p class="sub">Еңбек құқығы туралы қысқаша түсіндірмелер.</p>
+
+<div class="faq">
+<details>
+<summary>1. Келісу комиссиясы дегеніміз не?</summary>
+<p>Жұмыскер мен жұмыс беруші арасындағы жеке еңбек дауларын қарауға арналған тұрақты орган.</p>
+</details>
+<details>
+<summary>2. Жеке еңбек дауы дегеніміз не?</summary>
+<p>Еңбек заңнамасын немесе еңбек шартының талаптарын қолдануға қатысты тараптар арасындағы келіспеушілік.</p>
+</details>
+<details>
+<summary>3. Жұмысқа қайта алу туралы дау бойынша комиссияға қашан жүгіну керек?</summary>
+<p>ҚР Еңбек кодексінің 160-бабында көрсетілгендей, тиісті жұмыс беруші актісінің көшірмесі тапсырылған күннен бастап бір ай ішінде.</p>
+</details>
+<details>
+<summary>4. Басқа еңбек даулары бойынша мерзім қандай?</summary>
+<p>Өз құқығының бұзылғанын білген немесе білуге тиіс болған күннен бастап бір жыл.</p>
+</details>
+<details>
+<summary>5. Комиссия шешімінен кейін сотқа жүгіну мерзімі қандай?</summary>
+<p>Заңда көрсетілген жағдайларда комиссия шешімінің көшірмесі тапсырылған күннен бастап екі ай.</p>
+</details>
+<details>
+<summary>6. Еңбек шарты дегеніміз не?</summary>
+<p>Жұмыскер мен жұмыс берушінің арасындағы еңбек қатынастарын реттейтін келісім.</p>
+</details>
+<details>
+<summary>7. Еңбек дауын медиация арқылы шешуге бола ма?</summary>
+<p>Иә. Еңбек кодексінде көзделген тәртіппен медиация қолданылуы мүмкін.</p>
+</details>
+<details>
+<summary>8. Мерзім өткізіліп кетсе не болады?</summary>
+<p>Дәлелді себептер болған жағдайда заңда көзделген тәртіппен мерзімді қайта бастау мүмкіндігі қарастырылған.</p>
+</details>
+</div>
+</section>
+
+<section class="section" id="sources">
+<h2>Ресми дереккөздер</h2>
+<div class="card">
+<p><a href="https://adilet.zan.kz/kaz/docs/K1500000414" target="_blank">ҚР Еңбек кодексі — Әділет</a></p>
+<p><a href="https://adilet.zan.kz/kaz/docs/Z010000267_" target="_blank">Қазақстан Республикасындағы мерекелер туралы заң</a></p>
+<p><a href="https://www.gov.kz/article/33969" target="_blank">2026 жылғы мерекелер күнтізбесі</a></p>
+<p><a href="https://adilet.zan.kz/" target="_blank">Әділет ақпараттық-құқықтық жүйесі</a></p>
+</div>
+</section>
+
+<section class="section" id="author">
+<div class="card">
+<h2>Автор туралы</h2>
+<h3>Айдарбек Анель</h3>
+<p>Қазақстан Республикасының еңбек заңнамасы туралы ақпаратты жүйелеу және құқықтық сауаттылықты арттыру мақсатында әзірленген веб-сайт.</p>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="wrap">
+<strong>ЕҢБЕК ҚҰҚЫҒЫ</strong>
+<p>Сайт материалдары ақпараттық сипатта және заңгер кеңесін алмастырмайды.</p>
+<p>Сайтты жасаған: Айдарбек Анель.</p>
+</div>
+</footer>
+
+<script>
+
+/* =================================
+   1. КАЛЬКУЛЯТОР
+================================= */
+
+const types = {
+  "1":{
+    months:1,
+    title:"Келісу комиссиясына жүгіну",
+    article:"ҚР Еңбек кодексінің 160-бабы, 1) тармақшасы.",
+    description:"Жұмысқа қайта алу туралы дау бойынша."
+  },
+  "2":{
+    months:2,
+    title:"Сотқа жүгіну",
+    article:"ҚР Еңбек кодексінің 160-бабы, 1) тармақшасы.",
+    description:"Реттелмеген дау немесе комиссия шешімі орындалмаған жағдайларда."
+  },
+  "3":{
+    months:12,
+    title:"Басқа еңбек даулары бойынша жүгіну",
+    article:"ҚР Еңбек кодексінің 160-бабы, 2) тармақшасы.",
+    description:"Бұзылған құқық туралы білген немесе білуге тиіс болған күннен бастап."
+  }
+};
+
+/* Күнге ай немесе жыл қосу */
+function addMonths(date,months){
+  const year=date.getFullYear();
+  const month=date.getMonth();
+  const day=date.getDate();
+
+  const targetMonth=month+months;
+  const targetYear=year+Math.floor(targetMonth/12);
+  const normalizedMonth=((targetMonth%12)+12)%12;
+
+  const lastDay=new Date(
+    targetYear,normalizedMonth+1,0
+  ).getDate();
+
+  return new Date(
+    targetYear,
+    normalizedMonth,
+    Math.min(day,lastDay)
+  );
+}
+
+function calculateDeadline(){
+
+  const type=document.getElementById("disputeType").value;
+  const input=document.getElementById("startDate").value;
+  const error=document.getElementById("calcError");
+  const result=document.getElementById("result");
+
+  error.style.display="none";
+  result.style.display="none";
+
+  if(!input){
+    error.textContent="Алдымен күнді таңдаңыз.";
+    error.style.display="block";
+    return;
+  }
+
+  const [y,m,d]=input.split("-").map(Number);
+  const start=new Date(y,m-1,d);
+  const today=new Date();
+  today.setHours(0,0,0,0);
+
+  if(start>today){
+    error.textContent="Бастапқы күн болашақта болмауы керек.";
+    error.style.display="block";
+    return;
+  }
+
+  const info=types[type];
+  const deadline=addMonths(start,info.months);
+
+  const todayUTC=Date.UTC(
+    today.getFullYear(),today.getMonth(),today.getDate()
+  );
+  const deadlineUTC=Date.UTC(
+    deadline.getFullYear(),deadline.getMonth(),deadline.getDate()
+  );
+
+  const remaining=Math.ceil((deadlineUTC-todayUTC)/86400000);
+
+  const dateText=new Intl.DateTimeFormat("kk-KZ",{
+    day:"numeric",
+    month:"long",
+    year:"numeric"
+  }).format(deadline);
+
+  const weekday=new Intl.DateTimeFormat("kk-KZ",{
+    weekday:"long"
+  }).format(deadline);
+
+  document.getElementById("resultTitle").textContent=info.title;
+  document.getElementById("resultDate").textContent=dateText;
+  document.getElementById("resultWeekday").textContent=
+    "Апта күні: "+weekday;
+
+  document.getElementById("resultArticle").textContent=
+    info.article+" "+info.description;
+
+  const days=document.getElementById("resultDays");
+  const status=document.getElementById("resultStatus");
+
+  if(remaining>0){
+    days.textContent="Есептік күнге дейін: "+remaining+" күн.";
+    status.textContent=remaining<=7
+      ?"Ескерту: есептік мерзімнің аяқталуына аз уақыт қалды."
+      :"Есептік мерзім әлі аяқталған жоқ.";
+    status.style.color=remaining<=7?"#b47b17":"#33845a";
+  }else if(remaining===0){
+    days.textContent="Есептік соңғы күн бүгін.";
+    status.textContent="Бүгінгі күнді назарға алыңыз.";
+    status.style.color="#b47b17";
+  }else{
+    days.textContent="Есептік күннен "+Math.abs(remaining)+" күн өтті.";
+    status.textContent="Назар аударыңыз: есептік мерзім аяқталған болуы мүмкін.";
+    status.style.color="#bd4859";
+  }
+
+  result.style.display="block";
+}
+
+/* =================================
+   2. МЕРЕКЕЛЕР КҮНТІЗБЕСІ
+================================= */
+
+const months=[
+"Қаңтар","Ақпан","Наурыз","Сәуір",
+"Мамыр","Маусым","Шілде","Тамыз",
+"Қыркүйек","Қазан","Қараша","Желтоқсан"
+];
+
+const holidays={
+  "01-01":{name:"Жаңа жыл",type:"state"},
+  "01-02":{name:"Жаңа жыл",type:"state"},
+  "03-08":{name:"Халықаралық әйелдер күні",type:"state"},
+  "03-15":{name:"Конституция күні",type:"state"},
+  "03-21":{name:"Наурыз мейрамы",type:"state"},
+  "03-22":{name:"Наурыз мейрамы",type:"state"},
+  "03-23":{name:"Наурыз мейрамы",type:"state"},
+  "05-01":{name:"Қазақстан халқының бірлігі күні",type:"state"},
+  "05-07":{name:"Отан қорғаушы күні",type:"state"},
+  "05-09":{name:"Жеңіс күні",type:"state"},
+  "07-06":{name:"Астана күні",type:"state"},
+  "10-25":{name:"Республика күні",type:"national"},
+  "12-16":{name:"Тәуелсіздік күні",type:"state"}
+};
+
+/* Қосымша діни демалыс күндері.
+   2026 жылғы Құрбан айттың бірінші күні. */
+const religiousHolidays={
+  "2026-05-27":"Құрбан айттың бірінші күні",
+  "2026-01-07":"Православиелік Рождество"
+};
+
+const monthSelect=document.getElementById("month");
+const yearSelect=document.getElementById("year");
+
+months.forEach((name,i)=>{
+  const option=document.createElement("option");
+  option.value=i;
+  option.textContent=name;
+  monthSelect.appendChild(option);
+});
+
+const current=new Date();
+
+for(let y=2025;y<=2035;y++){
+  const option=document.createElement("option");
+  option.value=y;
+  option.textContent=y;
+  yearSelect.appendChild(option);
+}
+
+monthSelect.value=current.getMonth();
+yearSelect.value=current.getFullYear();
+
+function renderCalendar(){
+
+  const month=Number(monthSelect.value);
+  const year=Number(yearSelect.value);
+  const grid=document.getElementById("calendarGrid");
+
+  grid.innerHTML="";
+
+  const week=["Дс","Сс","Ср","Бс","Жм","Сб","Жс"];
+
+  week.forEach(name=>{
+    const el=document.createElement("div");
+    el.className="dayname";
+    el.textContent=name;
+    grid.appendChild(el);
+  });
+
+  const first=new Date(year,month,1);
+  const offset=(first.getDay()+6)%7;
+
+  for(let i=0;i<offset;i++){
+    const empty=document.createElement("div");
+    empty.className="day empty";
+    grid.appendChild(empty);
+  }
+
+  const total=new Date(year,month+1,0).getDate();
+
+  for(let day=1;day<=total;day++){
+
+    const date=new Date(year,month,day);
+
+    const mm=String(month+1).padStart(2,"0");
+    const dd=String(day).padStart(2,"0");
+
+    const key=mm+"-"+dd;
+    const fullKey=year+"-"+mm+"-"+dd;
+
+    const holiday=holidays[key];
+    const religious=religiousHolidays[fullKey];
+
+    const weekend=date.getDay()===0 || date.getDay()===6;
+
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="day";
+
+    if(holiday){
+      button.classList.add(holiday.type);
+    }else if(religious){
+      button.classList.add("religious");
+    }else if(weekend){
+      button.classList.add("weekend");
+    }
+
+    if(
+      day===current.getDate() &&
+      month===current.getMonth() &&
+      year===current.getFullYear()
+    ){
+      button.classList.add("today");
+    }
+
+    const title=holiday
+      ?holiday.name
+      :religious
+        ?religious
+        :weekend
+          ?"Демалыс күні"
+          :"Жұмыс күні";
+
+    button.innerHTML="<strong>"+day+"</strong>";
+
+    if(holiday || religious){
+      const small=document.createElement("small");
+      small.textContent=title;
+      button.appendChild(small);
+    }
+
+    button.addEventListener("click",()=>{
+
+      const dateText=new Intl.DateTimeFormat("kk-KZ",{
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+      }).format(date);
+
+      let category="Жұмыс күні";
+
+      if(holiday){
+        category=holiday.type==="national"
+          ?"Ұлттық мереке"
+          :"Мемлекеттік мереке";
+      }else if(religious){
+        category="Діни мерекеге байланысты демалыс күні";
+      }else if(weekend){
+        category="Апталық демалыс күні";
+      }
+
+      document.getElementById("dayInfo").innerHTML=
+        "<strong>"+dateText+"</strong><br>"+
+        title+"<br><span style='color:#8c74ed'>"+category+"</span>";
+    });
+
+    grid.appendChild(button);
+  }
+}
+
+renderCalendar();
+
+/* =================================
+   3. ЗАҢ БАПТАРЫН ІЗДЕУ
+================================= */
+
+const articles=[
+["22","Жұмыскердің негізгі құқықтары мен міндеттері"],
+["23","Жұмыс берушінің негізгі құқықтары мен міндеттері"],
+["28","Еңбек шартының мазмұны"],
+["30","Еңбек шартының мерзімі"],
+["33","Еңбек шартын жасасу тәртібі"],
+["52","Еңбек шартын бұзу негіздері"],
+["68","Жұмыс уақытының қалыпты ұзақтығы"],
+["69","Жұмыс уақытының қысқартылған ұзақтығы"],
+["77","Үстеме жұмыс"],
+["84","Демалыс күндері"],
+["85","Мереке күндері"],
+["87","Демалыс түрлері"],
+["90","Жыл сайынғы еңбек демалысы"],
+["108","Үстеме жұмысқа ақы төлеу"],
+["109","Мереке және демалыс күндеріндегі жұмысқа ақы төлеу"],
+["159","Жеке еңбек дауларын қарау тәртібі"],
+["160","Жеке еңбек даулары бойынша жүгіну мерзімдері"]
+];
+
+function showArticles(){
+
+  const search=document.getElementById("searchArticle")
+    .value.toLowerCase().trim();
+
+  const list=document.getElementById("articleList");
+  list.innerHTML="";
+
+  const filtered=articles.filter(a=>
+    a.join(" ").toLowerCase().includes(search)
+  );
+
+  if(filtered.length===0){
+    list.textContent="Сұрауыңыз бойынша бап табылмады.";
+    return;
+  }
+
+  filtered.forEach(a=>{
+    const card=document.createElement("div");
+    card.className="article";
+
+    const title=document.createElement("strong");
+    title.textContent=a[0]+"-бап. "+a[1];
+
+    const link=document.createElement("a");
+    link.href="https://adilet.zan.kz/kaz/docs/K1500000414";
+    link.target="_blank";
+    link.textContent="Ресми мәтінді оқу";
+    link.style.display="block";
+    link.style.marginTop="10px";
+    link.style.fontSize="12px";
+
+    card.appendChild(title);
+    card.appendChild(link);
+    list.appendChild(card);
+  });
+}
+
+showArticles();
+
+</script>
+</body>
+</html>
